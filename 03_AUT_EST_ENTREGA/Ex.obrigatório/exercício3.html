@@ -1,21 +1,29 @@
+<!doctype html>
+<html>
+<body>
+<p id = "myString">zyxtspqnmdba</p>
+<p id = "orderedString"></p>
 <script>
- list = document.querySelector('.output ul');
-list.innerHTML = '';
-var greetings = ['Happy Birthday!',
-                 'Merry Christmas my love',
-                 'A happy Christmas to all the family',
-                 'You\'re all I want for Christmas',
-                 'Get well soon'];
-
-for (var i = 0; i < greetings.length; i++) {
-  var input = greetings[i];
-  // Seu teste condicional precisa ir dentro dos parênteses
-  // na linha abaixo, substituindo o que está lá
-  if (greetings[i]) {
-    var result = input;
-    var listItem = document.createElement('li');
-    listItem.textContent = result;
-    list.appendChild(listItem);
-  }
+var myString = document.getElementById("myString").innerHTML;
+orderString(myString);
+function orderString(str) {
+    var i = 0;
+    var myArray = str.split("");
+    while (i < str.length){
+        var j = i + 1;
+        while (j < str.length) {
+            if (myArray[j] < myArray[i]){
+                var temp = myArray[i];
+                myArray[i] = myArray[j];
+                myArray[j] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
+    var newString = myArray.join("");
+    document.getElementById("orderedString").innerHTML = newString;
 }
 </script>
+</body>
+</html>
