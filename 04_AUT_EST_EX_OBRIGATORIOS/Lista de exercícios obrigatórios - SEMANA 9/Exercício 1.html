@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana 9</title>
+</head>
+<body>
+<form name ="entry">
+    <p> Adicione um número <input type="número" name="t1"></p>
+    <p><input type="button" value="clique aqui" onclick="javascript:even()"></p>
+    <p> Mostrar resultado <input type="text" name="t2"></p>
+</form>
+<script language="javascript">
+    function even()
+    {
+        var e;
+        e=parseInt(entry.t1.value);
+        if(e%2==0)
+        {
+            alert("valor par");
+            entry.t2.value="valor par"
+        }
+        else
+        {
+            alert("Valor impar");
+            entry.t2.value="valor impar";
+
+        }    
+    }
+
+</script>
+</body>
+</html>

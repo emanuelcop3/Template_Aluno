@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     schoolQuestion.list("2")
 })
