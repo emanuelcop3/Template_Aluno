@@ -5,8 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Título do Site</title>
+    <script  src="script.js"></script>
+    <script src="arquivo.json"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="estilos/style.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
@@ -14,15 +17,19 @@
             <h1>Data Science Portfolio</h1>
             <h1>Scrip do currículo</h1>
 
-            <button type="button"
-           >
-            Click.</button>
+            <p>Campo 1: <input type="text" id="field1" value="Projeto currículo"></p>
+            <p>Campo 2: <input type="text" id="field2"></p>
             
-            <p id="demo"></p></h1>
+            <p>Clicar em "Copiar" aciona uma função que copia o valor do texto de Campo1 para Campo2.</p>
+            
+            <button onclick="myFunction()">Copiar</button>
+            
+
+
             <img src="copyrob.png" alt="Foto de perfil">
         </header>
         <article>
-            <h2>Olá! Sou Emanuel de Oliveira Costa estudei 1 semestre Ciências de Dados e Inteligência Artificial na PUC-SP.</h2>
+            <h2>Olá! Sou Emanuel de Oliveira Costa estudei 1 semestre Ciências de Dados e Inteligência Artificial na PUC-SP e agora estudo no Inteli.</h2>
             <p>Participo ativamente de projetos integrados que buscam solucionar problemas e prever retornos para o negóco.
                 A seguir está o link de acesso ao repositório de arquivos no GitHub.
             </p>
