@@ -2,122 +2,103 @@ function myFunction() {
   document.getElementById("field2").value = document.getElementById("field1").value;
 }
 
+api = 'http://127.0.0.1:3071/'
 
-$(document).ready(function(){
-    curiculo.list("2")
-})
-var  curiculo = {
-    list(Id){
-            $.ajax({
-                type:'GET',
-                url:  'http://localhost:127.0.0.1:5500/' + Id,
-                success: function(resultados){
-           //         document.getElementById("questionsHeader").textContent = resultados.user.nome
-           resultados.forEach(questao => {
-var element = `<p><a href="https://github.com/emanuelcop3">Acesse meu perfil no GitHub</a></p>`
-document.getElementById("list").innerHTML += element
 
+$(document).ready(() => {
+    users.list();
+});
+
+
+var users = {
+    
+    list() {
+        $.ajax({
+            url: api + '/users',
+            type: 'GET',
+            success: data => {
+                var tx = '';
+                tx += '<div class="insert" onclick="user.insert()">Inserir</div>';
+                data.forEach(element => {
+                    tx += '<div class="user">';
+                        tx += '<div class="title">' + element.title + '</div>';
+                        tx += '<div class="actions">';
+                            tx += '<div class="action" onclick="user.update(' + element.userId + ',\'' + element.title + '\')">Editar</div>';
+                            tx += '<div class="action" onclick="user.delete(' + element.userId + ')">Excluir</div>';
+                        tx += '</div>';
+                    tx += '</div>';
+                });
+                $('#main').html(tx);
+            }
         });
-                }
-            })
+        
     }
+    
+};
+
+var user = {
+
+    insert() {
+        var title = prompt('Digite o nome:');
+        if (title) {
+            if (title.trim() != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: api + '/userinsert',
+                    data: {title: title},
+                }).done(function () {
+                    users.list();
+                }).fail(function (msg) {
+                    //console.log('FAIL');
+                }).always(function (msg) {
+                    //console.log('ALWAYS');
+                });
+            }
+        }
+    },
+
+
+    update(userId, oldTitle) {
+
+        var title = prompt('Digite o novo nome:', oldTitle);
+        if (title) {
+            if (title.trim() != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: api + '/userupdate',
+                    data: {title: title, userId: userId},
+                }).done(function () {
+                    users.list();
+                }).fail(function (msg) {
+                    //console.log('FAIL');
+                }).always(function (msg) {
+                    //console.log('ALWAYS');
+                });
+            }
+        }
+    },
+
+    delete(userId) {
+
+        if (confirm('Confirma a exclusão?')) {
+            $.ajax({
+                type: 'api',
+                url: api + '/userdelete',
+                data: {userId: userId},
+            }).done(function () {
+                users.list();
+            }).fail(function (msg) {
+                //console.log('FAIL');
+            }).always(function (msg) {
+                //console.log('ALWAYS');
+            });
+        }
+    },
+
 }
-
-
 
 var getDBResDiv = "#getDB";
 
-
-
-const express = require('script.js'); 
-const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-const sqlite3 = require('sqlite3').verbose();
-const DBPATH = 'bancodados.db';
-
-const hostname = '127.0.0.1';
-const port = 3071;
-const app = express();
-
-/* Servidor aplicação */
-
-app.use(express.static("../frontend/"));
-
-
-/* Definição dos endpoints */
-
-/******** CRUD ************/
-
-app.use(express.json());
-
-// Retorna todos registros (é o R do CRUD - Read)
-app.get('/users', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM tbUser ORDER BY title COLLATE NOCASE';
-	db.all(sql, [],  (err, rows ) => {
-		if (err) {
-		    throw err;
-		}
-		res.json(rows);
-	});
-	db.close(); // Fecha o banco
-});
-
-// Insere um registro (é o C do CRUD - Create)
-app.post('/userinsert', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "INSERT INTO tbUser (title, id, completed) VALUES ('" + req.body.title + "', 33, false)";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-	});
-	db.close(); // Fecha o banco
-	res.end();
-});
-
-// Atualiza um registro (é o U do CRUD - Update)
-app.post('/userupdate', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	//res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "UPDATE tbUser SET title = '" + req.body.title + "' WHERE userId = " + req.body.userId;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	db.close(); // Fecha o banco
-});
-
-// Exclui um registro (é o D do CRUD - Delete)
-app.post('/userdelete', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "DELETE FROM tbUser WHERE userId = " + req.body.userId;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	db.close(); // Fecha o banco
-});
-
-app.listen(port, hostname, () => {
-  console.log(`Page server running at http://${hostname}:${port}/`);
-});
 
 /* Função que faz uma requisição GET */
 function TestGETDB(){
