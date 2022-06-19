@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Título do Site</title>
     <link rel="stylesheet" href="estilos/style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <main>
@@ -13,11 +14,12 @@
             <h1>Data Science Portfolio</h1>
             <h1>Scrip do currículo</h1>
 
-            <button type="button"
-           >
-            Click.</button>
+            <p>Campo 1: <input type="text" id="field1" value="Projeto currículo"></p>
+            <p>Campo 2: <input type="text" id="field2"></p>
             
-            <p id="demo"></p></h1>
+            <p>Clicar em "Copiar" aciona uma função que copia o valor do texto de Campo1 para Campo2.</p>
+            
+            <button onclick="myFunction()">Copiar</button>
             <img src="copyrob.png" alt="Foto de perfil">
         </header>
         <article>
