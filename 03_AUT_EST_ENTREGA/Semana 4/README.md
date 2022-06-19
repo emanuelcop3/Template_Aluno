@@ -1,2 +1,2 @@
 # portifolio-site
- Projeto de portifólio com Git e GitHub
+ Projeto de currículo com Git e GitHub
