@@ -15,14 +15,15 @@ app.use(express.static("../Semana 6/"));
 
 app.use(express.json());
 
+function Yfunction() {
+	document.getElementById("field2").value = document.getElementById("field1").value;
+}
 
 /* Endpoint */
 
 /****** CRUD *******************/
 
-function myFunction() {
-	document.getElementById("field2").value = document.getElementById("field1").value;
-  }
+
   
   
   $(document).ready(function(){
@@ -44,5 +45,4 @@ function myFunction() {
 			  })
 	  }
   }
-  
   
