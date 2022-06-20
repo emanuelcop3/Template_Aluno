@@ -18,7 +18,7 @@ app.use(express.json());
 
 /* Definição dos endpoints */
 
-/****** CRUD ******************************************************************/
+/****** CRUD *******************/
 
 function myFunction() {
 	document.getElementById("field2").value = document.getElementById("field1").value;
