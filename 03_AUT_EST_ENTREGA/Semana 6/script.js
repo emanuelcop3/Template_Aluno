@@ -16,7 +16,7 @@ app.use(express.static("../Semana 6/"));
 app.use(express.json());
 
 
-/* Definição dos endpoints */
+/* Endpoints */
 
 /****** CRUD *******************/
 
