@@ -1,29 +1,6 @@
-const express = require('express'); 
-const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-const hostname = '127.0.0.1';
-
-onclick="document.getElementById('demo').innerHTML = Date()"
-
-
-const port = 3061;
-const sqlite3 = require('sqlite3').verbose();
-const app = express();
-const DBPATH = 'dbUser.db';
-
-app.use(express.static("../Semana 6/"));
-
-app.use(express.json());
-
-function Yfunction() {
+function myFunction() {
 	document.getElementById("field2").value = document.getElementById("field1").value;
-}
-
-/* Endpoint */
-
-/****** CRUD *******************/
-
-
+  }
   
   
   $(document).ready(function(){
